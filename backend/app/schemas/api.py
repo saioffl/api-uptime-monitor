@@ -2,7 +2,7 @@ import datetime
 from pydantic import BaseModel, EmailStr, ConfigDict
 
 
-class APIBase(BaseModel):
+class UserBase(BaseModel):
     id: int
     email: EmailStr
     hashed_password: str
@@ -11,7 +11,7 @@ class APIBase(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-class APIOutput(BaseModel):
+class UserOutput(BaseModel):
     id: int
     created_at: datetime.datetime
     model_config = ConfigDict(from_attributes=True)

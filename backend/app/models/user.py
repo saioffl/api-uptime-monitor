@@ -4,8 +4,8 @@ from ..database import Base
 from sqlalchemy.orm import mapped_column, Mapped
 
 
-class APIModel(Base):
-    __tablename__ = "api"
+class UserModel(Base):
+    __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     email: Mapped[str] = mapped_column(String(25), nullable=False)

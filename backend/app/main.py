@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from .routes import api
+
+from .routes import api, monitor
 from .database import Base, engine
 
 app = FastAPI(title="api-uptime-monitor")
@@ -17,4 +18,5 @@ def health():
     return {"status": "ok"}
 
 
+app.include_router(monitor.router)
 app.include_router(api.router)
