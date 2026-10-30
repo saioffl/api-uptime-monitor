@@ -8,9 +8,22 @@ from ..schemas.monitor import MonitorBase, MonitorOutput, MonitorCreate
 router = APIRouter(prefix="/api/monitor", tags=["monitor"])
 
 
+# @router.get(
+#     "/",
+#     response_model=list[MonitorOutput],
+# )
+# def get_api(db: Session = Depends(get_db)):
+#     resp = db.query(MonitorModel).all()
+
+#     if not resp:
+#         raise HTTPException(status_code=404, detail="API not found")
+#     print([obj.__dict__ for obj in resp])
+#     return resp
+
+
 @router.get(
     "/",
-    response_model=list[MonitorOutput],
+    response_model=list[MonitorBase],
 )
 def get_api(db: Session = Depends(get_db)):
     resp = db.query(MonitorModel).all()

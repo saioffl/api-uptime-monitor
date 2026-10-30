@@ -3,7 +3,9 @@ from typing import Annotated
 import httpx
 from fastapi import APIRouter, Depends, HTTPException, Path
 from sqlalchemy.orm import Session
+
 from ..models.monitor import MonitorModel
+from ..models.history import MonitorResultModel
 from ..schemas.monitor import MonitorOutput, MonitorBase, MonitorCreate, MonitorHealth
 from ..database import get_db
 
@@ -61,6 +63,20 @@ async def post_monitor_request(
     end_time = time.perf_counter()
     total_time = (end_time - start_time) * 1000
 
+    print(response)
+
+    history = MonitorResultModel(
+        monitor_id=id,
+        status_code=response.status_code,
+        response_time_ms=total_time,
+        is_up=200 <= response.status_code < 400,
+        error_message=None,
+    )
+    db.add(history)
+    db.commit()
+    db.refresh(history)
+
+    print(history)
     return MonitorHealth(
         monitor_id=id,
         status_code=response.status_code,
