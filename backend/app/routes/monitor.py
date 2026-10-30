@@ -5,7 +5,7 @@ from ..database import get_db
 from ..models.monitor import MonitorModel
 from ..schemas.monitor import MonitorBase, MonitorOutput, MonitorCreate
 
-router = APIRouter(prefix="/monitor", tags=["monitor"])
+router = APIRouter(prefix="/api/monitor", tags=["monitor"])
 
 
 @router.get(
