@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .routes import user, monitor, check, history
+from .routes import user, monitor, check, history, stats
 from .database import Base, engine
 
 app = FastAPI(title="api-uptime-monitor")
@@ -22,3 +22,4 @@ app.include_router(monitor.router)
 app.include_router(user.router)
 app.include_router(check.router)
 app.include_router(history.router)
+app.include_router(stats.router)
